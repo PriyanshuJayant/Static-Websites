@@ -1,0 +1,22 @@
+body{
+    background-color: pink;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+ul{
+    list-style:none;
+}
+#home{
+   margin-left:300px;
+   margin-right:300px;
+   border-left:1px solid;
+   border-right:1px solid;
+   padding:3cqw;
+   font-size:20px;
+   background-color: lightyellow;
+}
+#link{
+    list-style:circle;
+}

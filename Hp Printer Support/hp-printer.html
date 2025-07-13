@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HP Printer Support</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Segoe+UI:400,500,700|Roboto:400,500,700|Open+Sans:400,600,700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Roboto', 'Open Sans', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #222;
+            background: #f5f7fa;
+        }
+
+        /* Header Styles */
+        .header {
+            background: white;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 0;
+        }
+
+        .top-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 24px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .hp-logo {
+            width: 54px;
+            height: 54px;
+            background: #0096d6;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 22px;
+            margin-right: 22px;
+            letter-spacing: 1px;
+        }
+
+        .main-nav {
+            display: flex;
+            list-style: none;
+            gap: 32px;
+        }
+
+        .main-nav a {
+            text-decoration: none;
+            color: #222;
+            font-weight: 500;
+            padding: 12px 0;
+            transition: color 0.2s;
+        }
+        .main-nav a:hover, .main-nav a:focus {
+            color: #0096d6;
+            outline: none;
+        }
+
+        .search-container {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .search-box {
+            position: relative;
+        }
+
+        .search-input {
+            padding: 12px 16px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            width: 260px;
+            font-size: 15px;
+            transition: border-color 0.2s;
+        }
+        .search-input:focus {
+            border-color: #0096d6;
+            outline: none;
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 6px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 6px;
+            color: #0096d6;
+            font-size: 18px;
+        }
+        .search-btn:focus {
+            outline: 2px solid #0096d6;
+        }
+
+        .cart-icon, .signin-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+        }
+        .cart-icon {
+            font-size: 20px;
+            color: #0096d6;
+        }
+        .cart-icon:focus {
+            outline: 2px solid #0096d6;
+        }
+        .signin-btn {
+            background: #0096d6;
+            color: white;
+            border-radius: 6px;
+            padding: 12px 24px;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+        .signin-btn:hover, .signin-btn:focus {
+            background: #0077b6;
+            outline: none;
+        }
+
+        /* Support Navigation */
+        .support-nav {
+            background: #0096d6;
+            color: white;
+        }
+        .support-nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            padding: 0 24px;
+        }
+        .support-nav-item {
+            padding: 18px 24px;
+            cursor: pointer;
+            transition: background 0.3s;
+            border-bottom: 3px solid transparent;
+            font-size: 1rem;
+        }
+        .support-nav-item:hover,
+        .support-nav-item.active {
+            background: rgba(255, 255, 255, 0.1);
+            border-bottom-color: white;
+        }
+        .support-nav-item.active {
+            border-bottom-color: white;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 70px 0 60px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        .hero-text h1 {
+            font-size: 3.2rem;
+            font-weight: 400;
+            color: #222;
+            margin-bottom: 22px;
+        }
+        .hero-image {
+            text-align: center;
+        }
+        .hero-svg {
+            width: 400px;
+            height: 250px;
+            display: block;
+            margin: 0 auto;
+        }
+
+        /* Quick Actions */
+        .quick-actions {
+            background: white;
+            padding: 48px 0 44px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .quick-actions-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 36px;
+        }
+        .action-item {
+            text-align: center;
+            padding: 28px 10px 20px 10px;
+            border-radius: 10px;
+            transition: transform 0.3s, box-shadow 0.3s, background 0.2s;
+            cursor: pointer;
+            background: #f8f9fa;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+        }
+        .action-item:hover, .action-item:focus {
+            transform: translateY(-6px) scale(1.03);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.10);
+            background: #e3f2fd;
+            outline: none;
+        }
+        .action-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 18px auto;
+            background: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: #0096d6;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        .action-item .action-icon i {
+            font-size: 28px;
+        }
+        .action-text {
+            color: #0096d6;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 1.08rem;
+            letter-spacing: 0.01em;
+        }
+        .action-text:focus {
+            outline: 2px solid #0096d6;
+        }
+
+        /* Main Content */
+        .main-content {
+            background: white;
+            padding: 70px 0 60px 0;
+        }
+        .content-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: start;
+        }
+        .setup-section h2 {
+            font-size: 2.1rem;
+            color: #222;
+            margin-bottom: 22px;
+            font-weight: 500;
+        }
+        .setup-description {
+            color: #666;
+            margin-bottom: 28px;
+            line-height: 1.7;
+        }
+        .setup-btn {
+            background: #0096d6;
+            color: white;
+            border: none;
+            padding: 14px 34px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-bottom: 32px;
+            transition: background 0.2s;
+            font-size: 1rem;
+        }
+        .setup-btn:hover, .setup-btn:focus {
+            background: #0077b6;
+            outline: none;
+        }
+        .more-options {
+            color: #666;
+            font-size: 15px;
+            margin-bottom: 18px;
+        }
+        .option-links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .option-links a {
+            color: #0096d6;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+        }
+        .option-links a:hover, .option-links a:focus {
+            text-decoration: underline;
+            outline: none;
+        }
+        .setup-image {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.10);
+            background: #e3f2fd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 300px;
+        }
+        .setup-svg {
+            width: 100%;
+            max-width: 350px;
+            height: auto;
+            display: block;
+        }
+
+        /* Support Cards */
+        .support-cards {
+            background: #f8f9fa;
+            padding: 70px 0 60px 0;
+        }
+        .cards-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 44px;
+        }
+        .support-card {
+            background: white;
+            border-radius: 16px;
+            padding: 44px 32px;
+            text-align: center;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+            border: 1px solid #f0f0f0;
+            transition: transform 0.2s, box-shadow 0.2s;
+            min-height: 420px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+        }
+        .support-card:hover, .support-card:focus-within {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+            outline: none;
+        }
+        .card-icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 28px;
+        }
+        .icon-bg {
+            width: 74px;
+            height: 74px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.4rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+        }
+        .icon-bg.windows {
+            background: #0078d4;
+            color: #fff;
+        }
+        .icon-bg.ink {
+            background: #4ecdc4;
+            color: #fff;
+        }
+        .icon-bg.printer {
+            background: #e3f2fd;
+            color: #0096d6;
+        }
+        .icon-bg i {
+            font-size: 2.4rem;
+        }
+        .icon-emoji {
+            font-size: 2.4rem;
+        }
+        .card-title {
+            font-size: 1.35rem;
+            color: #222;
+            margin-bottom: 18px;
+            font-weight: 600;
+        }
+        .card-description {
+            color: #666;
+            line-height: 1.7;
+            margin-bottom: 24px;
+            font-size: 1.05rem;
+        }
+        .card-link {
+            color: #0096d6;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.08rem;
+            transition: color 0.2s;
+        }
+        .card-link:hover, .card-link:focus {
+            text-decoration: underline;
+            color: #0077b6;
+            outline: none;
+        }
+
+        /* Knowledge Library Search */
+        .knowledge-search {
+            background: #f8f9fa;
+            padding: 70px 0 60px 0;
+            text-align: center;
+        }
+        .knowledge-search h2 {
+            font-size: 1.5rem;
+            color: #222;
+            margin-bottom: 34px;
+            font-weight: 500;
+        }
+        .knowledge-search-box {
+            max-width: 500px;
+            margin: 0 auto;
+            position: relative;
+        }
+        .knowledge-search-input {
+            width: 100%;
+            padding: 16px 54px 16px 22px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 17px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        .knowledge-search-input:focus {
+            border-color: #0096d6;
+        }
+        .knowledge-search-btn {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #0096d6;
+            color: white;
+            border: none;
+            padding: 10px 14px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: background 0.2s;
+        }
+        .knowledge-search-btn:hover, .knowledge-search-btn:focus {
+            background: #0077b6;
+            outline: none;
+        }
+
+        /* Promotional Banner */
+        .promo-banner {
+            background: white;
+            padding: 48px 0 44px 0;
+        }
+        .banner-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            position: relative;
+        }
+        .banner-slide {
+            background: linear-gradient(135deg, #333 0%, #555 100%);
+            border-radius: 14px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            min-height: 220px;
+            position: relative;
+        }
+        .banner-content {
+            flex: 1;
+            padding: 44px;
+            color: white;
+        }
+        .banner-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            line-height: 1.2;
+        }
+        .banner-subtitle {
+            font-size: 1.1rem;
+            opacity: 0.92;
+            margin-bottom: 28px;
+            line-height: 1.5;
+        }
+        .banner-btn {
+            background: #0096d6;
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 7px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+            font-size: 1.08rem;
+        }
+        .banner-btn:hover, .banner-btn:focus {
+            background: #0077b6;
+            outline: none;
+        }
+        .banner-image {
+            flex: 1;
+            height: 220px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+        }
+        .banner-image svg {
+            width: 120px;
+            height: 120px;
+        }
+        .banner-dots {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 24px;
+        }
+        .dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: #ddd;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .dot.active {
+            background: #0096d6;
+        }
+
+        /* Footer */
+        .footer {
+            background: #1a1a1a;
+            color: #ccc;
+            padding: 70px 0 24px 0;
+        }
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        .footer-top {
+            border-bottom: 1px solid #333;
+            padding-bottom: 24px;
+            margin-bottom: 44px;
+        }
+        .country-selector {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: white;
+        }
+        .flag {
+            width: 22px;
+            height: 16px;
+            background: linear-gradient(to bottom, #ff0000 33%, #ffffff 33%, #ffffff 66%, #0000ff 66%);
+            border-radius: 2px;
+        }
+        .footer-links {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 44px;
+            margin-bottom: 44px;
+        }
+        .footer-column h3 {
+            color: white;
+            font-size: 1.08rem;
+            margin-bottom: 22px;
+            font-weight: 600;
+        }
+        .footer-column ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .footer-column ul li {
+            margin-bottom: 12px;
+        }
+        .footer-column ul li a {
+            color: #ccc;
+            text-decoration: none;
+            font-size: 15px;
+            transition: color 0.3s;
+        }
+        .footer-column ul li a:hover, .footer-column ul li a:focus {
+            color: #0096d6;
+            outline: none;
+        }
+        .social-links {
+            display: flex;
+            gap: 18px;
+            margin-top: 22px;
+        }
+        .social-icon {
+            width: 38px;
+            height: 38px;
+            background: #333;
+            border-radius: 7px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            font-size: 1.3rem;
+            transition: background 0.3s;
+        }
+        .social-icon:hover, .social-icon:focus {
+            background: #0096d6;
+            outline: none;
+        }
+        .newsletter-signup {
+            margin-top: 18px;
+        }
+        .newsletter-signup input[type="email"] {
+            padding: 10px 14px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 15px;
+            margin-right: 8px;
+            width: 180px;
+        }
+        .newsletter-signup button {
+            background: #0096d6;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.2s;
+        }
+        .newsletter-signup button:hover, .newsletter-signup button:focus {
+            background: #0077b6;
+            outline: none;
+        }
+        .footer-bottom {
+            border-top: 1px solid #333;
+            padding-top: 24px;
+            font-size: 13px;
+        }
+        .footer-legal {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 22px;
+            margin-bottom: 18px;
+        }
+        .footer-legal a {
+            color: #ccc;
+            text-decoration: none;
+        }
+        .footer-legal a:hover, .footer-legal a:focus {
+            color: #0096d6;
+            outline: none;
+        }
+        .footer-copyright {
+            color: #999;
+            font-size: 13px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 1024px) {
+            .cards-container, .footer-links {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        @media (max-width: 768px) {
+            .hero-content,
+            .content-wrapper {
+                grid-template-columns: 1fr;
+                gap: 36px;
+            }
+            .quick-actions-content {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 22px;
+            }
+            .cards-container {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+            .footer-links {
+                grid-template-columns: 1fr 1fr;
+                gap: 32px;
+            }
+            .banner-slide {
+                flex-direction: column;
+                text-align: center;
+            }
+            .banner-content {
+                padding: 32px 18px;
+            }
+            .banner-image {
+                width: 100%;
+                height: 150px;
+            }
+        }
+        @media (max-width: 480px) {
+            .quick-actions-content {
+                grid-template-columns: 1fr;
+            }
+            .footer-links {
+                grid-template-columns: 1fr;
+                gap: 18px;
+            }
+            .footer-legal {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="top-nav" aria-label="Main Navigation">
+            <div class="logo">
+                <div class="hp-logo" aria-label="HP Logo">hp</div>
+                <ul class="main-nav">
+                    <li><a href="#" tabindex="0">Explore</a></li>
+                    <li><a href="#" tabindex="0">Shop</a></li>
+                    <li><a href="#" style="color: #0096d6; font-weight: 600;" tabindex="0">Support</a></li>
+                </ul>
+            </div>
+            <div class="search-container">
+                <div class="search-box">
+                    <input type="text" class="search-input" placeholder="Search HP Support" aria-label="Search HP Support">
+                    <button class="search-btn" aria-label="Search"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </div>
+                <button class="cart-icon" aria-label="Cart"><i class="fa-solid fa-cart-shopping"></i></button>
+                <button class="signin-btn" aria-label="Sign in">Sign in</button>
+            </div>
+        </nav>
+        <div class="support-nav">
+            <div class="support-nav-content">
+                <div class="support-nav-item active" tabindex="0">Support Home</div>
+                <div class="support-nav-item" tabindex="0">Products ▼</div>
+                <div class="support-nav-item" tabindex="0">Software and Drivers</div>
+                <div class="support-nav-item" tabindex="0">Diagnostics ▼</div>
+                <div class="support-nav-item" tabindex="0">Contact Us</div>
+                <div class="support-nav-item" tabindex="0">Business Support ▼</div>
+                <div class="support-nav-item" tabindex="0">My HP Account ▼</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>HP Printer Support</h1>
+            </div>
+            <div class="hero-image">
+                <!-- SVG illustration for professional look -->
+                <svg class="hero-svg" viewBox="0 0 400 250" aria-label="HP Printer Illustration" role="img">
+                    <rect x="60" y="80" width="280" height="100" rx="18" fill="#e3f2fd" />
+                    <rect x="100" y="120" width="200" height="40" rx="8" fill="#90caf9" />
+                    <rect x="140" y="40" width="120" height="60" rx="10" fill="#0096d6" />
+                    <rect x="170" y="60" width="60" height="20" rx="4" fill="#fff" />
+                    <rect x="180" y="170" width="40" height="20" rx="4" fill="#bdbdbd" />
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Actions -->
+    <section class="quick-actions">
+        <div class="quick-actions-content">
+            <div class="action-item" tabindex="0">
+                <div class="action-icon"><i class="fa-solid fa-download"></i></div>
+                <a href="#" class="action-text" aria-label="Download drivers">Download drivers &gt;</a>
+            </div>
+            <div class="action-item" tabindex="0">
+                <div class="action-icon"><i class="fa-solid fa-clipboard-check"></i></div>
+                <a href="#" class="action-text" aria-label="Check warranty status">Check warranty status &gt;</a>
+            </div>
+            <div class="action-item" tabindex="0">
+                <div class="action-icon"><i class="fa-solid fa-phone"></i></div>
+                <a href="#" class="action-text" aria-label="Contact us">Contact us &gt;</a>
+            </div>
+            <div class="action-item virtual-assistant" tabindex="0">
+                <div class="action-icon"><i class="fa-solid fa-robot"></i></div>
+                <a href="#" class="action-text" aria-label="Ask our Virtual Assistant">Ask our Virtual Assistant &gt;</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="main-content">
+        <div class="content-wrapper">
+            <div class="setup-section">
+                <h2>How to setup your printer</h2>
+                <p class="setup-description">
+                    Click Printer Setup for step by step guidance on how to setup, 
+                    configure and register your printer.
+                </p>
+                <button class="setup-btn" aria-label="Printer Setup">Printer Setup</button>
+                <p class="more-options">More support options for this topic</p>
+                <div class="option-links">
+                    <a href="#" aria-label="View unboxing and printer setup videos">View unboxing and printer setup videos &gt;</a>
+                    <a href="#" aria-label="Wireless Print Support">Wireless Print Support &gt;</a>
+                </div>
+            </div>
+            <div class="setup-image">
+                <!-- SVG illustration for setup -->
+                <svg class="setup-svg" viewBox="0 0 350 300" aria-label="Printer Setup Illustration" role="img">
+                    <rect x="40" y="100" width="270" height="80" rx="16" fill="#bbdefb" />
+                    <rect x="80" y="140" width="190" height="30" rx="7" fill="#90caf9" />
+                    <rect x="120" y="60" width="110" height="50" rx="9" fill="#0096d6" />
+                    <rect x="145" y="80" width="60" height="15" rx="3" fill="#fff" />
+                    <rect x="160" y="190" width="30" height="15" rx="3" fill="#bdbdbd" />
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- Support Cards -->
+    <section class="support-cards">
+        <div class="cards-container">
+            <div class="support-card windows-card" tabindex="0">
+                <div class="card-icon">
+                    <span class="icon-bg windows"><i class="fa-brands fa-windows" aria-label="Windows 11"></i></span>
+                </div>
+                <h3 class="card-title">Scan / Print stopped working after upgrading to Windows 11?</h3>
+                <p class="card-description">
+                    Try these troubleshooting steps to fix scanning and printing issues on Windows 11.
+                </p>
+                <a href="#" class="card-link" aria-label="Learn more about Windows 11 printing issues">Learn more &gt;</a>
+            </div>
+
+            <div class="support-card instant-ink-card" tabindex="0">
+                <div class="card-icon">
+                    <span class="icon-bg ink"><i class="fa-solid fa-droplet" aria-label="Instant Ink"></i></span>
+                </div>
+                <h3 class="card-title">HP Instant Ink Support</h3>
+                <p class="card-description">
+                    Need help with HP Instant Ink? Find solutions and helpful tips on our support page.
+                </p>
+                <a href="#" class="card-link" aria-label="Get help with HP Instant Ink">Get help &gt;</a>
+            </div>
+
+            <div class="support-card printer-issue-card" tabindex="0">
+                <div class="card-icon">
+                    <span class="icon-bg printer"><i class="fa-solid fa-print" aria-label="Printer Issue"></i></span>
+                </div>
+                <h3 class="card-title">Printer offline or print job stuck in queue?</h3>
+                <p class="card-description">
+                    Use this Windows automated tool to help resolve common printing issues.
+                </p>
+                <a href="#" class="card-link" aria-label="Download tool for printer issues">Download tool &gt;</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Knowledge Library Search -->
+    <section class="knowledge-search">
+        <div class="container">
+            <h2>Search our knowledge library</h2>
+            <div class="knowledge-search-box">
+                <input type="text" class="knowledge-search-input" placeholder="What can we help you with?" aria-label="Knowledge library search">
+                <button class="knowledge-search-btn" aria-label="Search knowledge library"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Promotional Banner -->
+    <section class="promo-banner">
+        <div class="banner-container">
+            <div class="banner-slide">
+                <div class="banner-content">
+                    <h2 class="banner-title">PC problems? Let me help you!</h2>
+                    <p class="banner-subtitle">Tackle any tech problem with 24/7 support from an HP SmartFriend</p>
+                    <button class="banner-btn" aria-label="Find an Expert">Find an Expert</button>
+                </div>
+                <div class="banner-image">
+                    <!-- SVG for expert support -->
+                    <svg viewBox="0 0 120 120" aria-label="Expert Support" role="img">
+                        <circle cx="60" cy="60" r="55" fill="#fff" stroke="#0096d6" stroke-width="6" />
+                        <rect x="35" y="70" width="50" height="20" rx="6" fill="#0096d6" />
+                        <ellipse cx="60" cy="55" rx="18" ry="22" fill="#90caf9" />
+                        <ellipse cx="60" cy="55" rx="10" ry="12" fill="#fff" />
+                        <circle cx="60" cy="50" r="5" fill="#0096d6" />
+                    </svg>
+                </div>
+            </div>
+            <div class="banner-dots">
+                <span class="dot" tabindex="0"></span>
+                <span class="dot" tabindex="0"></span>
+                <span class="dot active" tabindex="0"></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-top">
+                <div class="country-selector">
+                    <span>Country/Region:</span>
+                    <div class="flag" aria-label="Country flag"></div>
+                    <span>United States</span>
+                </div>
+            </div>
+            <div class="footer-links">
+                <div class="footer-column">
+                    <h3>About Us</h3>
+                    <ul>
+                        <li><a href="#">Contact HP</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Investor relations</a></li>
+                        <li><a href="#">Sustainable impact</a></li>
+                        <li><a href="#">Inclusion at HP</a></li>
+                        <li><a href="#">Newsroom</a></li>
+                        <li><a href="#">Tech Takes</a></li>
+                        <li><a href="#">HP Store Newsletter</a></li>
+                        <li><a href="#">HP Printables Newsletter</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Ways to buy</h3>
+                    <ul>
+                        <li><a href="#">Shop online</a></li>
+                        <li><a href="#">Call an HP rep</a></li>
+                        <li><a href="#">Find a reseller</a></li>
+                        <li><a href="#">Enterprise store</a></li>
+                        <li><a href="#">Public sector purchasing</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="#">Download drivers</a></li>
+                        <li><a href="#">Support & troubleshooting</a></li>
+                        <li><a href="#">Community</a></li>
+                        <li><a href="#">Authorized service providers</a></li>
+                        <li><a href="#">Check repair status</a></li>
+                        <li><a href="#">Fraud alert</a></li>
+                        <li><a href="#">Security Center</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>HP Partners</h3>
+                    <ul>
+                        <li><a href="#">HP Amplify Partner Program</a></li>
+                        <li><a href="#">HP Partner Portal</a></li>
+                        <li><a href="#">Developers</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Stay connected</h3>
+                    <div class="social-links">
+                        <a href="#" class="social-icon" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-icon" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
+                        <a href="#" class="social-icon" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="social-icon" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                    <form class="newsletter-signup" aria-label="Newsletter Signup" onsubmit="event.preventDefault(); alert('Thank you for subscribing!');">
+                        <input type="email" placeholder="Your email" aria-label="Your email" required>
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-legal">
+                    <a href="#">Recalls</a>
+                    <a href="#">Product recycling</a>
+                    <a href="#">Accessibility</a>
+                    <a href="#">CA Supply Chains Act</a>
+                    <a href="#">Privacy</a>
+                    <a href="#">🍪 Your privacy choices</a>
+                    <a href="#">Terms of use</a>
+                    <a href="#">Limited warranty statement</a>
+                    <a href="#">Terms & conditions of sales & service</a>
+                    <a href="#">IP Notices</a>
+                </div>
+                <p class="footer-copyright">
+                    ©2025 HP Development Company, L.P. The information contained herein is subject to change without notice.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Accessibility: Keyboard navigation for quick actions and support cards
+        document.querySelectorAll('.action-item, .support-card, .dot').forEach(el => {
+            el.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    this.click();
+                }
+            });
+        });
+
+        // Search functionality
+        const searchInput = document.querySelector('.search-input');
+        const searchBtn = document.querySelector('.search-btn');
+        searchBtn.addEventListener('click', function() {
+            const query = searchInput.value.trim();
+            if (query) {
+                alert(`Searching for: ${query}`);
+            }
+        });
+        searchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                searchBtn.click();
+            }
+        });
+
+        // Support navigation interactivity
+        const supportNavItems = document.querySelectorAll('.support-nav-item');
+        supportNavItems.forEach(item => {
+            item.addEventListener('click', function() {
+                supportNavItems.forEach(nav => nav.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Action items click handlers
+        const actionItems = document.querySelectorAll('.action-item');
+        actionItems.forEach(item => {
+            item.addEventListener('click', function() {
+                const actionText = this.querySelector('.action-text').textContent;
+                alert(`Action clicked: ${actionText}`);
+            });
+        });
+
+        // Setup button functionality
+        const setupBtn = document.querySelector('.setup-btn');
+        setupBtn.addEventListener('click', function() {
+            alert('Redirecting to Printer Setup wizard...');
+        });
+
+        // Support card interactions
+        const supportCards = document.querySelectorAll('.support-card');
+        supportCards.forEach(card => {
+            card.addEventListener('click', function() {
+                const title = this.querySelector('.card-title').textContent;
+                alert(`Support card clicked: ${title}`);
+            });
+        });
+
+        // Knowledge library search functionality
+        const knowledgeSearchInput = document.querySelector('.knowledge-search-input');
+        const knowledgeSearchBtn = document.querySelector('.knowledge-search-btn');
+        knowledgeSearchBtn.addEventListener('click', function() {
+            const query = knowledgeSearchInput.value.trim();
+            if (query) {
+                alert(`Searching knowledge library for: ${query}`);
+            }
+        });
+        knowledgeSearchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                knowledgeSearchBtn.click();
+            }
+        });
+
+        // Banner carousel functionality
+        const dots = document.querySelectorAll('.dot');
+        let currentSlide = 2;
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', function() {
+                dots.forEach(d => d.classList.remove('active'));
+                this.classList.add('active');
+                currentSlide = index;
+            });
+        });
+        function rotateBanner() {
+            currentSlide = (currentSlide + 1) % dots.length;
+            dots.forEach(d => d.classList.remove('active'));
+            dots[currentSlide].classList.add('active');
+        }
+        // setInterval(rotateBanner, 5000);
+
+        // Find Expert button functionality
+        const expertBtn = document.querySelector('.banner-btn');
+        expertBtn.addEventListener('click', function() {
+            alert('Connecting you with an HP SmartFriend expert...');
+        });
+
+        // Footer social links
+        const socialLinks = document.querySelectorAll('.social-icon');
+        socialLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const platform = this.getAttribute('aria-label');
+                alert(`Opening ${platform} social media page`);
+            });
+        });
+    </script>
+</body>
+</html>
